@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+#ground {
+    display: table;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    background-color: #030296;
+}
+#word {
+    display: table-cell;
+    vertical-align: middle;
+    color: white;
+    font-size: 3em;
+    font-weight: bold;
+}
+#error {
+    color: red;
+}
+#person {
+    width: 100%;
+    background-color: #030296;
+    color: white;
+    font-weight: bold;
+}
+
+    </style>
+</head>
+<body>
+    <form id="setting">
+        총인원 : <input type="number" name="maxNum"> <br>
+        소수파 인원 : <input type="number" name="minorNum"> <br>
+        다수파 단어 : <input type="text" name="majorWord"> <br>
+        소수파 단어 : <input type="text" name="minorWord"> <br>
+    </form>
+    <button onclick="createGame()">게임 시작!</button>
+    <div id="person"></div>
+    <div id="ground" onclick="startGame()">
+        <span id="word"></span>
+    </div>
+    <div id="error"></div>
+</body>
+    <script type="text/javascript">
+        Array.prototype.shuffle = function() {
+            var input = this;
+            for (var i = input.length-1; i>=0; i--) {
+                var randomIndex = Math.floor(Math.random()*(i+1));
+                var itemAtIndex = input[randomIndex];
+                input[randomIndex] = input[i];
+                input[i] = itemAtIndex;
+            }
+            return input;
+        }
+        var gameSet = [];
+        var gameIndex;
+        var stateReady;
+        function createGame() {
+            var maxNum = document.forms["setting"]["maxNum"].value;
+            var minorNum = document.forms["setting"]["minorNum"].value;
+            if (Math.floor(maxNum/2) <= minorNum) {
+                document.getElementById("error").innerHTML = "소수파 인원을 조정해 주세요!";
+                return;
+            }
+
+            var majorWord = document.forms["setting"]["majorWord"].value;
+            var minorWord = document.forms["setting"]["minorWord"].value;
+            if (majorWord == "" || minorWord == "" || majorWord == null || minorWord == null) {
+                document.getElementById("error").innerHTML = "단어를 설정해 주세요!";
+                return;
+            }
+
+            // Create a game set
+            gameSet.length = maxNum;
+            gameSet.fill(majorWord).fill(minorWord, start=0, end=minorNum).shuffle();
+            gameIndex = 0;
+            stateReady = true;
+
+            document.getElementById("error").innerHTML = "";
+            document.getElementById("word").innerHTML = "준비";
+            document.getElementById("person").innerHTML = (gameIndex+1) + "번째 사람";
+
+            document.forms["setting"].reset();
+        }
+
+        function startGame() {
+            if (!Array.isArray(gameSet) || gameSet.length == 0) {
+                document.getElementById("error").innerHTML = "아직 준비가 안 됐어요!";
+                return;
+            }
+
+            if (stateReady) {
+                document.getElementById("word").innerHTML = gameSet[gameIndex];
+                stateReady = false;
+                gameIndex++;
+            } else {
+                if (gameIndex == gameSet.length) {
+                    document.getElementById("word").innerHTML = "끝";
+                    // Clear
+                    gameSet = [];
+                    gameIndex = 0;
+                } else {
+                    document.getElementById("word").innerHTML = "준비";
+                    document.getElementById("person").innerHTML = (gameIndex+1) + "번째 사람";
+                    stateReady = true;
+                }
+            }
+        }
+    </script>
+</html>
