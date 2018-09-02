@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+#title {
+    color: #0298CC;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: Helvetica;
+    text-align: center;
+    margin-bottom: 5px;
+}
 #ground {
     display: table;
+    background-color: #0298CC;
     width: 100%;
-    height: 100px;
+    height: 200px;
     text-align: center;
-    background-color: #030296;
+    margin-top: 3px;
+    border-radius: 4px;
 }
 #word {
     display: table-cell;
@@ -18,28 +29,64 @@
 }
 #error {
     color: red;
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
 }
 #person {
     width: 100%;
-    background-color: #030296;
+    color: #0298CC;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}
+form {
+    font-size: 20px;
+    font-weight: bold;
+    color: #0298CC;
+}
+input, button {
+    border-radius: 4px;
+    font-size: 30px;
+    width: 100%;
+    margin: 3px 0px 3px 0px;
+    text-align: center;
+    box-sizing: border-box;
+}
+input {
+    border: 0.1em solid;
+    border-color: #0298CC;
+    background-color: white;
+    color: #0298CC;
+    height: 45px;
+}
+button {
+    border: none;
+    background-color: #0298CC;
     color: white;
+    height: 55px;
     font-weight: bold;
 }
-
+button:active:focus {
+    border: none;
+    color: #0302CC;
+}
     </style>
 </head>
 <body>
+    <div id="title">WORD WOLF</div>
     <form id="setting">
-        총인원 : <input type="number" name="maxNum"> <br>
-        소수파 인원 : <input type="number" name="minorNum"> <br>
-        다수파 단어 : <input type="text" name="majorWord"> <br>
-        소수파 단어 : <input type="text" name="minorWord"> <br>
+        총 인원 <input type="number" name="maxNum"> <br>
+        소수파 인원 <input type="number" name="minorNum"> <br>
+        다수파 단어 <input type="text" name="majorWord"> <br>
+        소수파 단어 <input type="text" name="minorWord"> <br>
     </form>
-    <button onclick="createGame()">게임 시작!</button>
-    <div id="person"></div>
+    <button onclick="createGame()">게임 시작</button>
     <div id="ground" onclick="startGame()">
         <span id="word"></span>
     </div>
+    <div id="person"></div>
     <div id="error"></div>
 </body>
     <script type="text/javascript">
