@@ -104,8 +104,12 @@ button:active:focus {
         var gameIndex;
         var stateReady;
         function createGame() {
-            var maxNum = document.forms["setting"]["maxNum"].value;
-            var minorNum = document.forms["setting"]["minorNum"].value;
+            var maxNum = Number(document.forms["setting"]["maxNum"].value);
+            var minorNum = Number(document.forms["setting"]["minorNum"].value);
+            if (maxNum < 0 || minorNum < 0 || Number.isInteger(maxNum) == false || Number.isInteger(minorNum) == false) {
+                document.getElementById("error").innerHTML = "음수나 소수는 넣지 마세요!";
+                return;
+            }
             if (Math.floor(maxNum/2) <= minorNum) {
                 document.getElementById("error").innerHTML = "소수파 인원을 조정해 주세요!";
                 return;
