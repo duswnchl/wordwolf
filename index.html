@@ -77,10 +77,10 @@ button:active:focus {
 <body>
     <div id="title">WORD WOLF</div>
     <form id="setting">
-        총 인원 <input type="number" name="maxNum"> <br>
-        소수파 인원 <input type="number" name="minorNum"> <br>
-        다수파 단어 <input type="text" name="majorWord"> <br>
-        소수파 단어 <input type="text" name="minorWord"> <br>
+        총 인원 <input type="number" name="maxNum" autocomplete="off"> <br>
+        소수파 인원 <input type="number" name="minorNum" autocomplete="off"> <br>
+        다수파 단어 <input type="text" name="majorWord" autocomplete="off"> <br>
+        소수파 단어 <input type="text" name="minorWord" autocomplete="off"> <br>
     </form>
     <button onclick="createGame()">게임 시작</button>
     <div id="ground" onclick="startGame()">
