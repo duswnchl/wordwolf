@@ -121,6 +121,10 @@ button:active:focus {
                 document.getElementById("error").innerHTML = "단어를 설정해 주세요!";
                 return;
             }
+            if (majorWord == minorWord) {
+                document.getElementById("error").innerHTML = "소수파/다수파 단어를 다르게 설정해 주세요!";
+                return;
+            }
 
             // Create a game set
             gameSet.length = maxNum;
